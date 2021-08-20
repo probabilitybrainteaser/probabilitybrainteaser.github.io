@@ -1,0 +1,28 @@
+---
+title: How to make a cool plot in R!
+author: AP,YX,JH
+date: '2021-03-13'
+slug: []
+categories: []
+tags: []
+description: ~
+toc: yes
+authors: []
+series: []
+lastmod: '2021-03-13T12:51:22-06:00'
+featuredVideo: ~
+featuredImage: ~
+---
+
+Making a plot in `R` is as easy as $\pi$! See:
+
+```{r,warning = F, meassage = F}
+library(ggplot2)
+library(latex2exp)
+set.seed(1)
+n <- 1e3
+ggplot() + geom_line(color = "dodgerblue", data = data.frame(j = 1:n, X = cumsum(sample(c(-1,1),n,T))), aes(j,X)) + geom_line(color = "tomato", data = data.frame(j = 1:n, X = cumsum(sample(c(-1,1),n,T))), aes(j,X)) + theme_bw() + ylab(TeX("$X_j$")) + ggtitle(TeX("2 SSRW's, $X_{N_0}$")) + theme(plot.title = element_text(hjust = 0.5))
+```
+
+Check out the `ggplot2` [documentation](https://ggplot2.tidyverse.org/index.html)
+

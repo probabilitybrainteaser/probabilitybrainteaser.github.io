@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang='en' ><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+
+<title>How to get an (almost) fair coin | Probability Brain Teasers</title>
+<link rel="stylesheet" href="/css/eureka.min.css">
+<script defer src="/js/eureka.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload"
+  href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap"
+  as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/solarized-light.min.css"
+   media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js"
+   crossorigin></script>
+
+  <script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/languages/dart.min.js"
+     crossorigin></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/js/all.min.js"
+   integrity="sha256-uNYoXefWRqv&#43;PsIF/OflNmwtKM4lStn9yrz2gVl6ymo="  crossorigin></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+   integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3&#43;Aro6EYUG4&#43;cU&#43;KJWu/X"  media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" 
+  integrity="sha384-g7c&#43;Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI&#43;sEnkvrMWph2EDg4"  crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+   integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC&#43;Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"  crossorigin></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false },
+        { left: "\\(", right: "\\)", display: false },
+        { left: "\\[", right: "\\]", display: true }
+      ],
+    });
+  });
+</script>
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/images/logo_hu4f1f8199eb39934a31fae33957e961b9_1629707_32x32_fill_box_center_2.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/logo_hu4f1f8199eb39934a31fae33957e961b9_1629707_180x180_fill_box_center_2.png">
+
+<meta name="description"
+  content="If you toss a biased coin independently for a long time and take the parity of your coin tosses, you can get an almost fair coin.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1 ,
+      "name":"Posts",
+      "item":"/posts/"},{
+      "@type": "ListItem",
+      "position": 2 ,
+      "name":"How to get an (almost) fair coin",
+      "item":"/posts/2021-03-21-how-to-get-an-almost-fair-coin/"}]
+}
+</script>
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "/posts/2021-03-21-how-to-get-an-almost-fair-coin/"
+    },
+    "headline": "How to get an (almost) fair coin | Probability Brain Teasers","datePublished": "2021-03-20T00:00:00+00:00",
+    "dateModified": "2021-03-20T12:51:22-06:00",
+    "wordCount":  2132 ,
+    "author": {
+        "@type": "Person",
+        "name": ["YX","AP","JH"]
+    },
+    "publisher": {
+        "@type": "Project",
+        "name": "Probability Brain Teasers",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "/images/logo.png"
+        }
+        },
+    "description": "If you toss a biased coin independently for a long time and take the parity of your coin tosses, you can get an almost fair coin."
+}
+</script><meta property="og:title" content="How to get an (almost) fair coin | Probability Brain Teasers" />
+<meta property="og:type" content="article" />
+
+
+<meta property="og:image" content="/images/logo.png">
+
+
+<meta property="og:url" content="/posts/2021-03-21-how-to-get-an-almost-fair-coin/" />
+
+
+
+
+<meta property="og:description" content="If you toss a biased coin independently for a long time and take the parity of your coin tosses, you can get an almost fair coin." />
+
+
+
+
+<meta property="og:locale" content="en" />
+
+
+
+
+<meta property="og:site_name" content="Probability Brain Teasers" />
+
+
+
+
+
+
+<meta property="article:published_time" content="2021-03-20T00:00:00&#43;00:00" />
+
+
+<meta property="article:modified_time" content="2021-03-20T12:51:22-06:00" />
+
+
+
+<meta property="article:section" content="posts" />
+
+
+<meta property="article:tag" content="probability" />
+
+<meta property="article:tag" content="coin flip" />
+
+<meta property="article:tag" content="random walk" />
+
+
+
+
+
+<body class="flex flex-col min-h-screen">
+  <header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm">
+    <div class="w-full max-w-screen-xl mx-auto"><script>
+    let storageColorScheme = localStorage.getItem("lightDarkMode")
+    if (((storageColorScheme == 'Auto' || storageColorScheme == null) && window.matchMedia("(prefers-color-scheme: dark)").matches) || storageColorScheme == "Dark") {
+        document.getElementsByTagName('html')[0].classList.add('dark')
+    }
+</script>
+<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
+    <a href="/" class="mr-6 text-primary-text text-xl font-bold">Probability Brain Teasers</a>
+    <button id="navbar-btn" class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div id="target"
+        class="hidden block md:flex md:flex-grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
+        <div class="md:flex md:h-16 text-sm md:flex-grow pb-4 md:pb-0 border-b md:border-b-0">
+            <a href="/#about" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">About</a>
+            <a href="/posts/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  selected-menu-item  mr-4">Blog Posts</a>
+        </div>
+
+        <div class="flex">
+            <div class="relative pt-4 md:pt-0">
+                <div class="cursor-pointer hover:text-eureka" id="lightDarkMode">
+                    <i class="fas fa-adjust"></i>
+                </div>
+                <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id="is-open">
+                </div>
+                <div class="absolute flex flex-col left-0 md:left-auto right-auto md:right-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40"
+                    id='lightDarkOptions'>
+                    <span class="px-4 py-1 hover:text-eureka" name="Light">Light</span>
+                    <span class="px-4 py-1 hover:text-eureka" name="Dark">Dark</span>
+                    <span class="px-4 py-1 hover:text-eureka" name="Auto">Auto</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id="is-open-mobile">
+    </div>
+
+</nav>
+<script>
+    let element = document.getElementById('lightDarkMode')
+    if (storageColorScheme == null || storageColorScheme == 'Auto') {
+        document.addEventListener('DOMContentLoaded', () => {
+            switchMode('Auto')
+        })
+    } else if (storageColorScheme == "Light") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'sun')
+        element.firstElementChild.classList.add('fa-sun')
+    } else if (storageColorScheme == "Dark") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'moon')
+        element.firstElementChild.classList.add('fa-moon')
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        getcolorscheme();
+        switchBurger();
+    });
+</script>
+</div>
+  </header>
+  <main class="flex-grow pt-16">
+    <div class="pl-scrollbar">
+      <div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto">
+
+
+<div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12">
+    <div
+        class="col-span-2 lg:col-start-2 lg:col-span-6 bg-secondary-bg rounded px-6 py-8">
+        <h1 class="font-bold text-3xl text-primary-text">How to get an (almost) fair coin</h1>
+        <div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2021-03-20</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>11 min read</span>
+    </div>
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/probability/" class="hover:text-eureka">probability</a>
+        
+    </div>
+    
+
+    
+</div>
+        
+        
+        
+
+        <div class="content">
+            
+
+<div id="TOC">
+
+</div>
+
+<!--
+# How to get an almost fair coin?
+-->
+<p>Take <span class="math inline">\(d\)</span> independent tosses of a biased coin, which lands heads with probability <span class="math inline">\(c/d\)</span>, for constant <span class="math inline">\(c \le 0.5d\)</span>. Now, you count the number of heads you observe, and if this number is odd, you write down "head", and otherwise, you write down "tail". Surprisingly, you can obtain an almost fair coin this way.<br />
+Equivalently, let’s observe a sequence of bits <span class="math inline">\(\textbf{x} = x_1x_2...x_d\)</span>. Each bit <span class="math inline">\(x_i\)</span> is 1 with probability <span class="math inline">\(c/d, c \le 0.5d\)</span> and is 0 otherwise. Then the parity of this sequence has only exponential bias. Concretely,
+<span class="math display">\[\mathbb{P}[\chi(\textbf{x})= 1] = \frac{1}{2} \pm \exp(\Omega(c))\]</span>
+where <span class="math inline">\(\chi\)</span> is the parity function, i.e. <span class="math inline">\(\chi(\textbf{x}) =\sum_i x_i \text{ mod } 2\)</span>.</p>
+<p>This claim turns out to be extremely easy to show after a basic introduction to <em>finite, irreducible, ergodic Markov chains</em>.</p>
+<div id="crash-course-markov-chains" class="section level2">
+<h2>Crash Course: Markov Chains</h2>
+<p>Let <span class="math inline">\(S\)</span> be a finite state space and <span class="math inline">\(T\)</span> denote <em>time</em> which is a subset of <span class="math inline">\(\mathbb{N}\cup\{0\}\)</span>. A <a href="https://en.wikipedia.org/wiki/Stochastic_process#:~:text=A%20stochastic%20process%20is%20defined,measurable%20with%20respect%20to%20some"><strong>stochastic process</strong></a> is a sequence of random variables <span class="math inline">\(\{X_n: n \in T\}\)</span> which take values from <span class="math inline">\(S\)</span>. If <span class="math inline">\(X_n = i\)</span>, we say that the process is in state <span class="math inline">\(i\)</span> at time</p>
+<p><span class="math inline">\(n\)</span>. Suppose that
+<span class="math display">\[\mathbb{P}[X_{n + 1} = j | X_n = i, X_{n - 1} = i_{n - 1}, ..., X_1 = i_1, X_0 = i_0] = \mathbb{P}[X_{n + 1} = j | X_n = i] = p_{i,j}\]</span>
+for all states <span class="math inline">\(i_0, i_1, ..., i, j \in S\)</span> and all <span class="math inline">\(n \ge 0\)</span>. Then this sequence of conditional probabilities is also a sequence of random variables, and this stochastic process is known as a <strong>finite Markov chain</strong>. Informally, this states that the future is independent of the past given the present.</p>
+<p>The <strong>transition matrix</strong> <span class="math inline">\(\textbf{P}= (p_{i,j})\)</span> is a <span class="math inline">\(|S| \times |S|\)</span> matrix of transition probabilities, where</p>
+<p><span class="math inline">\(p_{i,j} = \mathbb{P}(X_{n+1} = j|X_n = i)\)</span>.
+<span class="math display">\[\textbf{P} = \begin{bmatrix} p_{00} &amp; p_{01} &amp; p_{02} &amp; \cdots \\
+                    p_{10} &amp; p_{11} &amp; p_{12} &amp; \cdots \\
+                    \vdots &amp; \vdots &amp; \vdots &amp; \\
+                    p_{i0} &amp; p_{i1} &amp; p_{i2} &amp; \cdots \\
+                    \vdots &amp; \vdots &amp; \vdots &amp; \\
+            \end{bmatrix}\]</span></p>
+<p>In our example, we have two states: <span class="math inline">\(0\)</span> (an even number of heads after <span class="math inline">\(d\)</span> flips) and <span class="math inline">\(1\)</span> (an odd number of heads). Let us define our transition probabilities to be <span class="math inline">\(p = 1 - c/d\)</span> (the probability of flipping tails), and <span class="math inline">\(q = c/d\)</span> (the probability of heads). If this chain is in state <span class="math inline">\(0\)</span> during time <span class="math inline">\(n\)</span>, i.e. <span class="math inline">\(X_n = 0\)</span>, then the process will remain in state <span class="math inline">\(0\)</span> with probability <span class="math inline">\(p_{0,0} = p\)</span> and transition to state <span class="math inline">\(1\)</span> with probability <span class="math inline">\(p_{0,1} = q\)</span>. Similarly, if <span class="math inline">\(X_n = 1\)</span>, then <span class="math inline">\(p_{1,0} = q\)</span>, and <span class="math inline">\(p_{1,1} = p\)</span>. Thus, we obtain our transition matrix
+<span class="math display">\[\textbf{Q} = \begin{bmatrix} p &amp; q \\
+                    q &amp; p \\
+            \end{bmatrix}\]</span></p>
+<p>We say that a finite Markov chain is <strong>irreducible</strong> if and only if its graph representation is a strongly connected graph. That is, each state (represented by a vertex/node) is reachable from all of the other states with non-zero probability. As can be seen in the graph representation of <span class="math inline">\(\textbf{Q}\)</span> below, <span class="math inline">\(\textbf{Q}\)</span> is irreducible.</p>
+<center>
+<p><img src="/posts/2021-03-21-how-to-get-an-almost-fair-coin/index.en_files/figure-html/fig1.0.png" style="width:50.0%" /></p>
+</center>
+<div id="periodicity" class="section level3">
+<h3>Periodicity</h3>
+<p>Let <span class="math inline">\(\textbf{Q}(n)\)</span> be the transition matrix at time <span class="math inline">\(n\)</span>, and <span class="math inline">\(p_{i,j}(n)\)</span> be the <span class="math inline">\(ij\)</span>-th entry of this matrix. Then, the <strong>period</strong> of a state <span class="math inline">\(i\)</span> is the greatest common divisor of the set <span class="math inline">\(\{n: p_{i,i}(n) &gt; 0, n\ge 1\}\)</span>, i.e. the set of times in which state <span class="math inline">\(i\)</span> is reachable. We write <span class="math inline">\(d(i) = \gcd\{n: p_{i,i}(n) &gt; 0, n\ge 1\}\)</span>. Thus, for a chain whose current state is <span class="math inline">\(i\)</span>, it is impossible for the chain to return to state <span class="math inline">\(i\)</span> in <span class="math inline">\(t\)</span> steps unless <span class="math inline">\(t\)</span> is divisible by <span class="math inline">\(d(i)\)</span>.</p>
+<p>We call state <span class="math inline">\(i\)</span> <strong>periodic</strong> if <span class="math inline">\(d(i) &gt; 1\)</span> and <strong>aperiodic</strong> if <span class="math inline">\(d(i) = 1\)</span>. We notice that in our transition matrix <span class="math inline">\(\textbf{Q}\)</span>, <span class="math inline">\(p_{i,i} &gt; 0\)</span> for <span class="math inline">\(i = 0,1\)</span>. This means that in each step, we can get back to the last state with positive probability; therefore, our Markov chain is <em>aperiodic</em>.</p>
+</div>
+<div id="recurrence" class="section level3">
+<h3>Recurrence</h3>
+<p>Let <span class="math inline">\(f_{i,i}(n) = \mathbb{P}[X_n = i, X_k \ne i \text{ for } 0 &lt; k &lt; n | X_0 = i]\)</span>; that is, <span class="math inline">\(f_{i,i}(n)\)</span> is the probability that the chain will return to its beginning state for the first time at time <span class="math inline">\(n\)</span>. Next, let <span class="math inline">\(f_{i,i}\)</span> be the probability that given <span class="math inline">\(X_0 = i\)</span>, <span class="math inline">\(X_n = i\)</span> for some <span class="math inline">\(n &gt; 0\)</span>. That is,
+<span class="math display">\[f_{i,i} = \sum_{n = 1}^{\infty}f_{i,i}(n)\]</span>
+State <span class="math inline">\(i\)</span> is said to be <strong>recurrent</strong> if <span class="math inline">\(f_{i,i} = 1\)</span>. Informally, if a chain’s beginning state <span class="math inline">\(i\)</span> is recurrent, then the chain will eventually return to state <span class="math inline">\(i\)</span> with probability 1. Alternatively, we say that state <span class="math inline">\(i\)</span> is <strong>transient</strong> if <span class="math inline">\(f_{i,i} &lt; 1\)</span>.</p>
+<p>For a recurrent state, the <strong>mean recurrence time</strong> <span class="math inline">\(\mu_i\)</span> is defined as:
+<span class="math display">\[\mu_i = \sum_{n=1}^\infty nf_{i,i}(n)\]</span></p>
+<p>The mean recurrence time is the expected amount of time for the chain to return to its beginning state.</p>
+<p>A recurrent state <span class="math inline">\(i\)</span> is called <strong>positive recurrent</strong> if <span class="math inline">\(\mu_i &lt; \infty\)</span>. Notice that a recurrent state <span class="math inline">\(i\)</span> can have infinite mean recurrence time. Such a state is called <strong>null recurrent</strong>. A state is said to be <strong>ergodic</strong> if it is positive recurrent and aperiodic. A Markov chain is ergodic if all states are ergodic.</p>
+<p>In our example, given that the chain is in state <span class="math inline">\(0\)</span>, in the next coin flip, the chain either remains in state <span class="math inline">\(0\)</span> with probability <span class="math inline">\(p\)</span> (flipping a tail), or transitions to state <span class="math inline">\(1\)</span> with probability <span class="math inline">\(q\)</span> (flipping a head). Alternatively, if the chain is in state <span class="math inline">\(1\)</span>, then in the next coin flip, the chain remains in state <span class="math inline">\(1\)</span> with probability <span class="math inline">\(p\)</span>, or transitions to state <span class="math inline">\(0\)</span> with probability <span class="math inline">\(q\)</span>. Therefore, the mean recurrence times for our chain are:
+<span class="math display">\[\mu_0 = \sum_{k} nf_{0,0}(k) = p + q\sum_{k = 0}^{\infty}(k+1)p^kq\]</span>
+And:
+<span class="math display">\[\mu_1 = \sum_{k} nf_{1,1}(k) = p + q\sum_{k = 0}^{\infty}(k+1)p^kq\]</span>
+Notice that <span class="math inline">\(\sum_{k = 0}^{\infty}kp^kq\)</span> is the expectation of a geometric distribution with probability <span class="math inline">\(q\)</span> and <span class="math inline">\(\sum_{k = 0}^{\infty}p^kq\)</span> is the sum of the probability mass of the
+same geometric distribution. Thus, as <span class="math inline">\(\sum_{k = 0}^{\infty}(k+1)p^kq = \sum_{k = 0}^{\infty}kp^kq + \sum_{k = 0}^{\infty}p^kq = 1/q + 1\)</span>,
+<span class="math display">\[\mu_0 = \mu_1 = p + q\cdot (1/q + 1) = 2\]</span>
+Hence, both states of our Markov chain are positive recurrent. In fact, this Markov chain is <em>ergodic</em>.</p>
+</div>
+<div id="stationary-distributions" class="section level3">
+<h3>Stationary distributions</h3>
+<p>A stationary distribution of a Markov chain is a probability
+distribution <span class="math inline">\(\bar \pi\)</span> such that <span class="math inline">\(\bar \pi \textbf{P} = \bar \pi\)</span>. In other words, <span class="math inline">\(\bar{\pi}\)</span> is the long-term limiting distribution of the chain. In fact, any finite, irreducible, and ergodic Markov chain has a unique <a href="https://en.wikipedia.org/wiki/Stationary_distribution"><strong>stationary distribution</strong></a> <span class="math inline">\(\bar \pi =(\pi_0,\pi_1,...,\pi_n)\)</span>, with <span class="math inline">\(\pi_0 + \pi_1 + ... + \pi_n = 1\)</span> (Theorem 7.7 in <span class="citation">Mitzenmacher and Upfal (<a href="#ref-mitzenmacher2017probability" role="doc-biblioref">2017</a>)</span>). Hence, for our
+example:</p>
+<p><span class="math display">\[\bar \pi \textbf{Q} = [\pi_0, \pi_1] \begin{bmatrix} p &amp; q \\
+                    q &amp; p \\
+            \end{bmatrix} =  \bar \pi\hspace{2cm}\pi_0 + \pi_1 = 1\]</span>
+This produces a system of equations whose solution gives us that <span class="math inline">\(\pi_0 = \pi_1 = 1/2\)</span>. This tells us that <em>if you flip a biased coin an infinite number of times, you can place a bet on the parity of the number of heads and win half of the time</em>. In other words,
+<span class="math display">\[\mathbb{P}[\chi(x_1x_2...) = 1] = 1/2\]</span></p>
+<p>How fast does the probability converge to <span class="math inline">\(1/2\)</span> with respect to the number of coin tosses? In fact, this convergence is geometric.</p>
+<!--
+Theorems: `An additional yet important benefit of using R Markdown is that you will be able to write technical documents easily, due to the fact that blogdown inherits the HTML output format from bookdown (Xie 2016). For example, it is possible to write LaTeX math equations, citations, and even theorems and proofs if you want: https://bookdown.org/yihui/rmarkdown/bookdown-markdown.html`
+
+Citations: `https://blogdown-demo.rbind.io/2017/08/28/adding-citations-to-posts/`
+
+-->
+
+<div class="theorem">
+<span id="thm:unnamed-chunk-1" class="theorem"><strong>Theorem 1  </strong></span><span class="citation">(Theorem 12.5 in Mitzenmacher and Upfal <a href="#ref-mitzenmacher2017probability" role="doc-biblioref">2017</a>)</span>
+Let <span class="math inline">\(\bar\pi^n_i\)</span> represent the distribution of the state of the chain starting at state <span class="math inline">\(i\)</span> after <span class="math inline">\(n\)</span> steps. Let <span class="math inline">\(\textbf{P}\)</span> be the transition matrix for a finite, irreducible, aperiodic Markov chain. Let <span class="math inline">\(\nu_j\)</span> be the smallest entry in the <span class="math inline">\(j\)</span>th column of the matrix, and let <span class="math inline">\(\nu = \sum_j \nu_j\)</span>. Then for all <span class="math inline">\(i\)</span> and <span class="math inline">\(n\)</span>,
+<span class="math display">\[|| \bar\pi^n_i - \bar\pi || \le (1- \nu)^n .\]</span>
+</div>
+
+<p>Now we are ready to prove the bound for our motivating example. Since <span class="math inline">\(c \le 0.5d\)</span>, we have <span class="math inline">\(q &lt; p\)</span>. Thus, if we take <span class="math inline">\(d\)</span> coin tosses,
+<span class="math display">\[|| \bar\pi^n_0 - \bar\pi || \le (1- 2q)^d = (1 - 2\cdot \frac{c}{d})^d \le \exp(-2c)\]</span></p>
+<p>In summary, the probability of obtaining an odd number of heads is within <span class="math inline">\(\pm \exp(-2c)\)</span> of <span class="math inline">\(0.5\)</span>.</p>
+<p>For a fixed value of <span class="math inline">\(c\)</span> and <span class="math inline">\(d\)</span>, the probability distribution for <span class="math inline">\(X_d\)</span> can be computed exactly. First, define the initial distribution to be <span class="math inline">\(\pi = \left[\mathbb{P}(X_0 = 0), \mathbb{P}(X_0 = 1)\right] = [1,0]\)</span>. Then, <span class="math inline">\(X_d\)</span> has distribution <span class="math inline">\(\pi\cdot\textbf{Q} = \pi \cdot\begin{bmatrix}p &amp; q \\q &amp; p \end{bmatrix}^d\)</span>. Thus, for <span class="math inline">\(c = 1, d = 10\)</span>, the distribution of <span class="math inline">\(X_{10}\)</span> is <span class="math inline">\([\mathbb{P}(X_{10} = 0),\mathbb{P}(X_{10} = 1)] \approx [0.554, 0.446]\)</span>.</p>
+<!--
+
+The initial distribution of a Markov chain describes the probability distribution of values taken on by $X_0$. For a chain that has a state space with $n+1$ states, the initial distribution can be described by a row vector $\pi = [\mathbb{P}(X_0 = s_0),\mathbb{P}(X_0 = s_1),...,\mathbb{P}(X_0 = s_n)] = [p_1,p_2,...,p_n]$. Then, consider the vector-matrix product of the initial distribution with the transition matrix: 
+
+\[
+\pi\cdot\textbf{P} = [p_0,p_1,...,p_n]\cdot
+\begin{bmatrix} p_{00} & p_{01}  & \cdots & p_{0n}\\
+                    p_{10} & p_{11} & \cdots & p_{1n}\\
+                    \vdots & \vdots & \vdots & \\
+                    p_{n0} & p_{n1} & \cdots & p_{nn}  \\
+\end{bmatrix}
+= \begin{bmatrix}
+p_0\cdot p_{00} + p_1\cdot p_{10} +... +p_n\cdot p_{n0}\\
+p_0\cdot p_{01} + p_1\cdot p_{11} +... +p_n\cdot p_{n1}\\
+\vdots\\
+p_0\cdot p_{0n} + p_1\cdot p_{1n} +... +p_n\cdot p_{nn}
+\end{bmatrix}^T
+\]
+
+Consider the $j$-th element of $\pi\cdot \textbf{P}$: 
+\begin{align*}
+\pi\cdot \textbf{P}_j & = p_0\cdot p_{0j} + p_1\cdot p_{1j} +... +p_n\cdot p_{nj} \\
+& = \mathbb{P}(X_0 = s_0)\cdot \mathbb{P}(X_1 = j | X_0 = s_0) + \mathbb{P}(X_0 = s_1)\cdot \mathbb{P}(X_1 = j | X_0 = s_1) +... +\mathbb{P}(X_0 = s_n)\cdot \mathbb{P}(X_1 = j | X_0 = s_n)\\
+&=\mathbb{P}(X_1 = j , X_0 = s_0) + \mathbb{P}(X_1 = j , X_0 = s_1) + ... + \mathbb{P}(X_1 = j , X_0 = s_n)\\
+&=\mathbb{P}(X_1 = j)
+\end{align*}
+
+Thus, $\pi\cdot\textbf{P} = [\mathbb{P}(X_1 = s_0),\mathbb{P}(X_1 = s_1),...,\mathbb{P}(X_1 = s_n)]$, which is the distribution of $X_1$. In a similar manner, it can be shown that the distribution of $X_k$ is $\pi\cdot \textbf{P}^k$, assuming that $\textbf{P}(1) = \textbf{P}(n)$, for all $n$ (the transition matrix is constant, or **homogeneous**).
+
+-->
+<p>Fixing <span class="math inline">\(p= \frac 9 {10}\)</span>, the distribution of <span class="math inline">\(X_d\)</span> can be studied for various values of <span class="math inline">\(d\)</span>.</p>
+<center>
+<img src="/posts/2021-03-21-how-to-get-an-almost-fair-coin/index.en_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+</center>
+<p>As to be expected, as <span class="math inline">\(d\)</span> gets large, the probability that the number of heads will be odd converges to <span class="math inline">\(\frac 1 2\)</span>.</p>
+</div>
+</div>
+<div id="generalization" class="section level2">
+<h2>Generalization</h2>
+<div id="modulo-m" class="section level3">
+<h3>Modulo <span class="math inline">\(m\)</span></h3>
+<p>What happens if we toss the same coin, but take modulo <span class="math inline">\(m\)</span> in our final step instead of the parity? The transition matrix thus becomes <span class="math inline">\(m\times m\)</span>:</p>
+<p><span class="math display">\[\textbf{Q} = \begin{bmatrix} p &amp; q &amp; 0 &amp; 0 &amp; ... &amp; 0 &amp; 0 \\
+                    0 &amp; p &amp; q &amp; 0 &amp; ... &amp; 0 &amp; 0  \\
+\vdots  &amp; \vdots  &amp; \ddots  &amp; \ddots  &amp; \vdots  &amp; \vdots &amp; \vdots\\
+\vdots  &amp; \vdots  &amp; \vdots  &amp; \ddots  &amp; \ddots  &amp; \vdots &amp; \vdots\\
+\vdots  &amp; \vdots  &amp; \vdots  &amp; \vdots  &amp;  \ddots &amp; \ddots &amp; \vdots\\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; ...  &amp; p &amp; q \\
+q &amp; 0 &amp; 0 &amp; 0 &amp; ... &amp; 0 &amp; p \\
+            \end{bmatrix}\]</span></p>
+<p>Notice that the graph of this Markov chain is exactly a cycle with self-loops. Again, <span class="math inline">\(\mu_i, i \in 0, ..., m-1\)</span> are sums of geometric series, which are finite.</p>
+<center>
+<p><img src="/posts/2021-03-21-how-to-get-an-almost-fair-coin/index.en_files/figure-html/fig2.0.png" style="width:50.0%" /></p>
+</center>
+<p>As for the stationary distribution,
+<span class="math display">\[\bar \pi \textbf{Q} = (\pi_0, \pi_1, ... , \pi_{m-1}) = \bar \pi \hspace{2cm} \sum_{j = 0}^{m-1}\pi_j = 1\]</span>
+gives us <span class="math inline">\(\pi_i = 1/n, i \in 0, ..., m-1\)</span>. That is, we obtain the uniform distribution as the number of flips goes to infinity. We cannot apply the coupling theorem directly because each of the columns of the transition matrix has 0’s.</p>
+<!--
+In terms of convergence rate, we see that if we take $d$ coin tosses,
+$$|| \bar\pi^n_0 - \bar\pi || \le (1- mq)^d = (1 - m\cdot \frac{c}{d})^d \le \exp(-mc)$$
+-->
+<p>In fact, we can see for a small value of <span class="math inline">\(d\)</span>, that the convergence to the uniform distribution is quite slow. For <span class="math inline">\(c = 1,d = 10\)</span> and <span class="math inline">\(m = 3\)</span>, the distribution of <span class="math inline">\(X_d\)</span> is far from uniform: <span class="math display">\[[\mathbb{P}(X_{10} = 0),\mathbb{P}(X_{10} = 1),\mathbb{P}(X_{10} = 2)] = \pi\cdot\textbf{Q}^{10} =\begin{bmatrix}1&amp; 0&amp; 0\end{bmatrix}\cdot\begin{bmatrix}.9 &amp; .1 &amp; 0 \\0&amp; .9 &amp; .1 \\ .1 &amp; 0 &amp; .9\end{bmatrix}^{10} \approx \begin{bmatrix}0.406&amp; 0.399&amp; 0.195\end{bmatrix}\]</span></p>
+<p>However, at around 30 tosses, the distribution approaches uniform.
+<!--
+And again fixing $p=\frac9 {10}$, the distribution of $X_d$ can be studied for different values of $d$.
+--></p>
+<center>
+<p><img src="/posts/2021-03-21-how-to-get-an-almost-fair-coin/index.en_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</center>
+</div>
+<div id="m-sided-dice" class="section level3">
+<h3><span class="math inline">\(m\)</span>-sided dice</h3>
+<p>Let’s take this problem one step further. Suppose now we are instead tossing a <span class="math inline">\(m\)</span>-sided die, which lands 0 with probability <span class="math inline">\(1 - c/d, c \le 0.5d\)</span>, and lands <span class="math inline">\(i\)</span> with probability <span class="math inline">\(r = c/(d\cdot (m-1)), i = 1, ..., m-1\)</span>. Again, we take modulo <span class="math inline">\(m\)</span> in our final step. In this case, the transition matrix becomes
+<span class="math display">\[\textbf{Q} = \begin{bmatrix} p &amp; r &amp;  ... &amp; r &amp; r \\
+                    r &amp; p &amp;  ... &amp; r &amp; r  \\
+\vdots  &amp; \vdots  &amp; \ddots  &amp; \vdots  &amp; \vdots \\
+r &amp; r &amp; ...  &amp; p &amp; r \\
+r &amp; r &amp; ... &amp; r &amp; p \\
+            \end{bmatrix}\]</span>
+which is a clique with self loops. The following lemma simplifies the verification of the positive recurrence of our example.</p>
+
+<div class="lemma">
+<span id="lem:unnamed-chunk-6" class="lemma"><strong>Lemma 1  </strong></span><span class="citation">(Lemma 7.5 in Mitzenmacher and Upfal <a href="#ref-mitzenmacher2017probability" role="doc-biblioref">2017</a>)</span> In a finite Markov chain, at least one state is recurrent and all
+recurrent states are positive recurrent.
+</div>
+
+<p>Without loss of generality, assume state <span class="math inline">\(0\)</span> is positive recurrent. By symmetry, we obtain that this Markov chain is positive recurrent. The stationary distribution is again uniform, i.e. <span class="math inline">\(\pi_i = 1/n, i \in 0, ..., m-1\)</span>. The rate of convergence, however, is faster.
+<span class="math display">\[|| \bar\pi^n_0 - \bar\pi || \le (1- mr)^d = (1 - m\cdot \frac{c}{d\cdot (m-1)})^d \le \exp(-c\cdot\frac{m}{m-1})\]</span></p>
+<p>Fix <span class="math inline">\(c=1,d=10\)</span>. For a six sided die that rolls <span class="math inline">\(0\)</span> with <span class="math inline">\(p=1-\frac c d = .9\)</span>, and rolls <span class="math inline">\(i\)</span> with probability <span class="math inline">\(\frac{1-p}{5} = 0.02,i\in\{1,2,3,4,5\}\)</span>, then the distribution of <span class="math inline">\(X_{10}\)</span> is: <span class="math display">\[\pi\cdot\textbf{Q}^{10}=\begin{bmatrix}1&amp;0&amp;0&amp;0&amp;0&amp;0\end{bmatrix}\cdot \begin{bmatrix}.9 &amp; .02 &amp; .02 &amp; .02 &amp; .02 &amp; .02\\.02 &amp; .9  &amp; .02 &amp; .02 &amp; .02 &amp; .02\\ .02 &amp; .02 &amp; .9  &amp; .02 &amp; .02 &amp; .02\\.02 &amp; .02 &amp; .02 &amp; .9  &amp; .02 &amp; .02\\.02 &amp; .02 &amp; .02 &amp; .02 &amp; .9 &amp; .02\\.02 &amp; .02 &amp; .02 &amp; .02 &amp; .02 &amp; .9\end{bmatrix}^{10} \approx \begin{bmatrix}0.399 &amp; 0.12 &amp; 0.12 &amp; 0.12 &amp; 0.12 &amp; 0.12\end{bmatrix}\]</span></p>
+<p>Fixing <span class="math inline">\(p\)</span>:</p>
+<center>
+<img src="/posts/2021-03-21-how-to-get-an-almost-fair-coin/index.en_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+</center>
+<p>(A small amount of dodge has been added to help differentiate between the lines)</p>
+<p><span style="float:right"><span class="math inline">\(\blacksquare\)</span></span></p>
+</div>
+</div>
+<div id="acknowledgements" class="section level2">
+<h2>Acknowledgements</h2>
+<p>We thank Dr. Joe Neeman for his insightful comments on earlier drafts.</p>
+</div>
+<div id="references" class="section level2 unnumbered">
+<h2>References</h2>
+<div id="refs" class="references">
+<div id="ref-mitzenmacher2017probability">
+<p>Mitzenmacher, Michael, and Eli Upfal. 2017. <em>Probability and Computing: Randomization and Probabilistic Techniques in Algorithms and Data Analysis</em>. Cambridge university press.</p>
+</div>
+</div>
+</div>
+
+        </div>
+        
+        <div class="my-4">
+    
+    <a href="/tags/probability/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#probability</a>
+    
+    <a href="/tags/coin-flip/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#coin flip</a>
+    
+    <a href="/tags/random-walk/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#random walk</a>
+    
+</div>
+        
+        
+        
+        
+        
+        <div class="py-2">
+    
+    <div class="flex flex-col md:flex-row items-center my-8">
+        <a href="/authors/yx/" class="w-24 h-24 md:mr-4">
+            
+            
+            <img src="/images/xinyu.jpg" class="w-full bg-primary-bg rounded-full" alt="Avatar">
+            
+        </a>
+        <div class="w-full md:w-auto mt-4 md:mt-0">
+            <a href="/authors/yx/" class="block font-bold text-lg pb-1 mb-2 border-b">Yangxinyu Xie</a>
+            <span class="block pb-2">University of Texas at Austin Computer science and Mathematics</span>
+            
+            
+            
+            
+            
+            <a href="https://www.cs.utexas.edu/~yx4247/" class="mr-1">
+                <i class="fas fa-link"></i>
+            </a>
+            
+        </div>
+    </div>
+    
+    <div class="flex flex-col md:flex-row items-center my-8">
+        <a href="/authors/ap/" class="w-24 h-24 md:mr-4">
+            
+            
+            <img src="/images/lh1.jpg" class="w-full bg-primary-bg rounded-full" alt="Avatar">
+            
+        </a>
+        <div class="w-full md:w-auto mt-4 md:mt-0">
+            <a href="/authors/ap/" class="block font-bold text-lg pb-1 mb-2 border-b">Amanda Priestley</a>
+            <span class="block pb-2"></span>
+            
+            
+            
+            
+            
+            <a href="" class="mr-1">
+                <i class="&lt;nil&gt; fa-&lt;nil&gt;"></i>
+            </a>
+            
+        </div>
+    </div>
+    
+    <div class="flex flex-col md:flex-row items-center my-8">
+        <a href="/authors/jh/" class="w-24 h-24 md:mr-4">
+            
+            
+            <img src="/images/jacob.jpg" class="w-full bg-primary-bg rounded-full" alt="Avatar">
+            
+        </a>
+        <div class="w-full md:w-auto mt-4 md:mt-0">
+            <a href="/authors/jh/" class="block font-bold text-lg pb-1 mb-2 border-b">Jacob Helwig</a>
+            <span class="block pb-2"></span>
+            
+            
+            
+            
+            
+            <a href="mailto:jacob.a.helwig@gmail.com" class="mr-1">
+                <i class="fas fa-envelope"></i>
+            </a>
+            
+            
+            
+            
+            
+            <a href="https://www.linkedin.com/in/jacob-helwig/" class="mr-1">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            
+        </div>
+    </div>
+    
+</div>
+        
+        
+        
+        
+
+<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "probability-brain-teasers" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    </div>
+    
+
+    
+    
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+        hljs.initHighlightingOnLoad();
+    })
+</script>
+
+      </div>
+    </div>
+    
+  </main>
+  <footer class="pl-scrollbar">
+    <div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b">
+    <p class="text-sm text-tertiary-text">&copy; 2021 <a href="https://www.wangchucheng.com/">C. Wang</a> and <a href="https://www.ruiqima.com/">R. Ma</a>
+ &middot;  Powered by the <a href="https://github.com/wangchucheng/hugo-eureka" class="hover:text-eureka">Eureka</a> theme for <a href="https://gohugo.io" class="hover:text-eureka">Hugo</a></p>
+</div></div>
+  </footer>
+</body>
+
+</html>

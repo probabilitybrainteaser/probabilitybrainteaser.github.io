@@ -1,0 +1,279 @@
+---
+title: How to get an almost fair coin?
+author: YX,AP,JH
+date: '2021-03-21'
+slug: []
+categories: []
+tags: []
+description: ~
+toc: yes
+authors: []
+series: []
+lastmod: '2021-03-21T12:07:35-05:00'
+featuredVideo: ~
+featuredImage: ~
+---
+
+title: How to get an almost fair coin?
+date: '2021-03-20'
+categories: [probability]
+tags: [probability, coin flip, random walk]
+summary: If you toss a biased coin independently for a long time and take the parity of your coin tosses, you can get an almost fair coin.
+authors: [AP,YX,JH]
+lastmod: '2021-03-20T12:51:22-06:00'
+output: pdf_document
+toc: yes
+
+
+# How to get an almost fair coin?
+
+Take $d$ independent tosses of a biased coin, which lands heads with probability $c/d, c \le 0.5d$. Now, you count the number of heads you observe, and if this number is odd, you write down \"head\", and otherwise, you write down \"tail\". Surprisingly, you can obtain an almost fair coin this way.\
+Equivalently, let's observe a sequence of bits $\textbf{x} = x_1x_2...x_d$. Each bit $x_i$ is 1 with probability $c/d, c  \le 0.5d$ and is 0 otherwise. Then the parity of this sequence has only exponential bias. Concretely,
+$$\mathbb{P}[\chi(\textbf{x})= 1] = \frac{1}{2} \pm \exp(\Omega(c))$$
+where $\chi$ is the parity function, i.e. $\chi(\textbf{x}) =\sum_i x_i \text{ mod } 2$.
+
+This claim turns out to be extremely easy to show with a basic introduction of *finite, irreducible, ergodic Markov chains*.
+
+## Crash Course Markov Chains
+
+Let $S$ be a finite state space and $T$ be a subset of $\mathbb{N}\cup\{0\}$. A [**stochastic process**](https://en.wikipedia.org/wiki/Stochastic_process#:~:text=A%20stochastic%20process%20is%20defined,measurable%20with%20respect%20to%20some) is a sequence of random variables $\{X_n: n \in T\}$, often ordered by time, which take values from $S$. Let $\{X_n, n = 0, 1, 2, ... \}$ be a stochastic process that takes on values from $S$. If $X_n = i$, we say that the process is in state $i$ at time $n$. Suppose that
+$$\mathbb{P}[X_{n + 1} = j | X_n = i, X_{n - 1} = i_{n - 1}, ..., X_1 = i_1, X_0 = i_0] = \mathbb{P}[X_{n + 1} = j | X_n = i] = p_{i,j}$$
+for all states $i_0, i_1, ..., i, j \in S$ and all $n \ge 0$. Such a stochastic process is known as a **finite Markov chain**. Informally, this states that the future is independent of the past given the present. 
+
+The **transition matrix** $\textbf{P}= (p_{i,j})$ is a $|S| \times |S|$ matrix of transition probabilities, where $p_{i,j} = \mathbb{P}(X_{n+1} = j|X_n = i)$.
+$$\textbf{P} = \begin{bmatrix} p_{00} & p_{01} & p_{02} & \cdots \\
+                    p_{10} & p_{11} & p_{12} & \cdots \\
+                    \vdots & \vdots & \vdots & \\
+                    p_{i0} & p_{i1} & p_{i2} & \cdots \\
+                    \vdots & \vdots & \vdots & \\
+            \end{bmatrix}$$
+
+In our example, we have two states: $0$ (an even number of heads after $d$ flips) and $1$ (an odd number of heads). Let the probability of tails be $p = 1 - c/d$ and the probability of heads be $q = c/d$. If this chain is in state $0$ during time $n$, i.e. $X_n = 0$, then the process will remain in state $0$ with probability $p_{0,0} = p$ and transition to state $1$ with probability $p_{0,1} = q$. Similarly, if $X_n = 1$, then $p_{1,0} = q$, and $p_{1,1} = p$. Thus, we obtain our transition matrix 
+$$\textbf{Q} = \begin{bmatrix} p & q \\
+                    q & p \\
+            \end{bmatrix}$$
+
+We say that a finite Markov chain is **irreducible** if and only if its graph representation is a strongly connected graph (that is, each state, represented by a vertex/ node, is reached by all of the other states with non-zero probability, represented by an edge/ link). As can be seen in the graph representation of $\textbf{Q}$ below, $\textbf{Q}$ is irreducible.
+
+![image](figs/fig1.0.png)
+
+### Periodicity
+
+Let $\textbf{Q}(n)$ be the transition matrix at time $n$, and $p_{i,j}(n)$ be the $ij$-th entry of this matrix. Then, the **period** of a state $i$ is the largest common divisor of the set $\{n: p_{i,i}(n) > 0, n\ge 1\}$. We write $d(i) = \gcd\{n: p_{i,i}(n) > 0, n\ge 1\}$. Thus, for a chain whose current state is $i$, it is impossible for the chain to return to state $i$ in $t$ steps unless $t$ is divisible by $d(i)$. 
+
+We call state $i$ **periodic** if $d(i) > 1$ and **aperiodic** if $d(i) = 1$. We notice that in $\textbf{Q}$, $p_{i,i} > 0$ for $i = 0,1$. This means that in each step, we can get back to the last state with positive probability; therefore, our Markov chain is *aperiodic*. 
+
+### Recurrence
+
+Let $f_{i,i}(n) = \mathbb{P}[X_n = i, X_k \ne i \text{ for } 0 < k < n | X_0 = i]$; that is, $f_{i,i}(n)$ is the probability that the chain will return to its beginning state for the first time at time $n$. Next, let $f_{i,i}$ be the probability that given $X_0 = i$, $X_n = i$ for some $n > 0$. That is,
+$$f_{i,i} = \sum_{n = 1}^{\infty}f_{i,i}(n)$$
+State $i$ is said to be **recurrent** if $f_{i,i} = 1$. Informally, if a chain's beginning state $i$ is recurrent, then the chain will eventually return to state $i$ with probability 1. Alternatively, we say that state $i$ is **transient** if $f_{i,i} < 1$. 
+
+For a recurrent state, the **mean recurrence time** $\mu_i$ is defined as:
+$$\mu_i = \sum_{n=1}^\infty nf_{i,i}(n)$$ 
+
+The mean recurrence time is the expected amount of time for the chain to return to its beginning state.
+
+A recurrent state $i$ is called **positive recurrent** if $\mu_i < \infty$. Notice that a recurrent state $i$ can have infinite mean recurrence time. Such a state is called **null recurrent**. A state is said to be **ergodic** if it is positive recurrent and aperiodic. A Markov chain is ergodic if all states are ergodic.
+
+In our example, given that the chain is in state $0$, in the next coin flip, the chain either remains in state $0$ with probability $p$ (flipping a tail), or transitions to state $1$ with probability $q$ (flipping a head). Alternatively, if the chain is in state $1$, then in the next coin flip, the chain remains in state $1$ with probability $p$, or transitions to state $0$ with probability $q$. Therefore, the mean recurrence times for our chain are:
+$$\mu_0 = \sum_{n} nf_{0,0}(n) = p + q\sum_{k = 0}^{\infty}(k+1)p^kq$$
+And:
+$$\mu_1 = \sum_{n} nf_{1,1}(n) = p + q\sum_{k = 0}^{\infty}(k+1)p^kq$$
+Notice that $\sum_{k = 0}^{\infty}kp^kq$ is the expectation of a geometric distribution with probability $q$ and $\sum_{k = 0}^{\infty}p^kq$ is the sum of the probability mass of the
+same geometric distribution. Thus, as $\sum_{k = 0}^{\infty}(k+1)p^kq = \sum_{k = 0}^{\infty}kp^kq + \sum_{k = 0}^{\infty}p^kq = 1/q + 1$,
+$$\mu_0 = \mu_1 = p + q\cdot (1/q + 1) = 2$$ 
+Hence, both states of our Markov chain are positive recurrent. In fact, this Markov chain is *ergodic*.
+
+
+
+### Stationary distributions
+
+
+A stationary distribution of a Markov chain is a probability
+distribution $\bar \pi$ such that $\bar \pi \textbf{P} = \bar \pi$. In other words, $\bar{\pi}$ is the long-term limiting distribution of the chain. In fact, any finite, irreducible, and ergodic Markov chain has a unique [**stationary distribution**](https://en.wikipedia.org/wiki/Stationary_distribution) $\bar \pi =(\pi_0,\pi_1,...,\pi_n)$, with $\pi_0 + \pi_1 + ... + \pi_n = 1$ (Theorem 7.7 in 
+
+[@Mitzenmacher_Eli_Probability_and_computing]). Hence, for our
+example:
+
+$$\bar \pi \textbf{Q} = [\pi_0, \pi_1] \begin{bmatrix} p & q \\
+                    q & p \\
+            \end{bmatrix} =  \bar \pi\hspace{2cm}\pi_0 + \pi_1 = 1$$ 
+This produces a system of equations whose solution gives us that $\pi_0 = \pi_1 = 1/2$. This tells us that *if you flip a biased coin an infinite number of times, you can place a bet on the parity of the number of heads and win half of the time*. In other words,
+$$\mathbb{P}[\chi(x_1x_2...) = 1] = 1/2$$
+
+How fast does the probability converge to $1/2$ with respect to the number of coin tosses? In fact, this convergence is geometric.
+
+Theorems: `An additional yet important benefit of using R Markdown is that you will be able to write technical documents easily, due to the fact that blogdown inherits the HTML output format from bookdown (Xie 2016). For example, it is possible to write LaTeX math equations, citations, and even theorems and proofs if you want: https://bookdown.org/yihui/rmarkdown/bookdown-markdown.html`
+
+Citations: `https://blogdown-demo.rbind.io/2017/08/28/adding-citations-to-posts/`
+
+#```{theorem} 
+Theorem 12.5 in cite{Mitzenmacher_Eli_Probability_and_computing}
+Let $\bar\pi^n_i$ represent the distribution of the state of the chain starting at state $i$ after $n$ steps. Let $\textbf{P}$ be the transition matrix for a finite, irreducible, aperiodic Markov chain. Let $m_j$ be the smallest entry in the $j$th column of the matrix, and let $m = \sum_j m_j$. Then for all $i$ and $n$,
+$$|| \bar\pi^n_i - \bar\pi || \le (1- m)^n .$$
+#```
+
+Now we are ready to conclude our motivating example. Since $c \le 0.5d$, we have $q < p$. Thus, if we take $d$ coin tosses,
+$$|| \bar\pi^n_0 - \bar\pi || \le (1- 2q)^d = (1 - 2\cdot \frac{c}{d})^d \le \exp(-2c)$$
+
+In summary, the probability of obtaining an odd number of heads is within $\pm \exp(-2c)$ of $0.5$.
+
+For a fixed value of $c$ and $d$, the probability distribution for $X_d$ can be analyzed exactly. First, define the initial distribution to be $\pi = \left[\mathbb{P}(X_0 = 0), \mathbb{P}(X_0 = 1)\right] = [1,0]$. Then, $X_d$ has distribution $\pi\cdot\textbf{Q}  = \pi \cdot\begin{bmatrix}p & q \\q & p \end{bmatrix}^d$. Thus, for $c = 1, d = 10$, the distribution of $X_{10}$ is $[\mathbb{P}(X_{10} = 0),\mathbb{P}(X_{10} = 1)] \approx [0.554, 0.446]$.
+
+<!--
+
+The initial distribution of a Markov chain describes the probability distribution of values taken on by $X_0$. For a chain that has a state space with $n+1$ states, the initial distribution can be described by a row vector $\pi = [\mathbb{P}(X_0 = s_0),\mathbb{P}(X_0 = s_1),...,\mathbb{P}(X_0 = s_n)] = [p_1,p_2,...,p_n]$. Then, consider the vector-matrix product of the initial distribution with the transition matrix: 
+
+\[
+\pi\cdot\textbf{P} = [p_0,p_1,...,p_n]\cdot
+\begin{bmatrix} p_{00} & p_{01}  & \cdots & p_{0n}\\
+                    p_{10} & p_{11} & \cdots & p_{1n}\\
+                    \vdots & \vdots & \vdots & \\
+                    p_{n0} & p_{n1} & \cdots & p_{nn}  \\
+\end{bmatrix}
+= \begin{bmatrix}
+p_0\cdot p_{00} + p_1\cdot p_{10} +... +p_n\cdot p_{n0}\\
+p_0\cdot p_{01} + p_1\cdot p_{11} +... +p_n\cdot p_{n1}\\
+\vdots\\
+p_0\cdot p_{0n} + p_1\cdot p_{1n} +... +p_n\cdot p_{nn}
+\end{bmatrix}^T
+\]
+
+Consider the $j$-th element of $\pi\cdot \textbf{P}$: 
+\begin{align*}
+\pi\cdot \textbf{P}_j & = p_0\cdot p_{0j} + p_1\cdot p_{1j} +... +p_n\cdot p_{nj} \\
+& = \mathbb{P}(X_0 = s_0)\cdot \mathbb{P}(X_1 = j | X_0 = s_0) + \mathbb{P}(X_0 = s_1)\cdot \mathbb{P}(X_1 = j | X_0 = s_1) +... +\mathbb{P}(X_0 = s_n)\cdot \mathbb{P}(X_1 = j | X_0 = s_n)\\
+&=\mathbb{P}(X_1 = j , X_0 = s_0) + \mathbb{P}(X_1 = j , X_0 = s_1) + ... + \mathbb{P}(X_1 = j , X_0 = s_n)\\
+&=\mathbb{P}(X_1 = j)
+\end{align*}
+
+Thus, $\pi\cdot\textbf{P} = [\mathbb{P}(X_1 = s_0),\mathbb{P}(X_1 = s_1),...,\mathbb{P}(X_1 = s_n)]$, which is the distribution of $X_1$. In a similar manner, it can be shown that the distribution of $X_k$ is $\pi\cdot \textbf{P}^k$, assuming that $\textbf{P}(1) = \textbf{P}(n)$, for all $n$ (the transition matrix is constant, or **homogeneous**).
+
+-->
+
+```{r,echo=F,results=F}
+c <- 1
+d <- 10
+p <-1 - c / d
+(p. <- matrix(c(p,1-p,1-p,p),2,2))
+init <- matrix(c(1,0),1,2)
+round(init %*% expm::`%^%`(p.,10),3)
+```
+
+Fixing $p= \frac 9 {10}$, the distribution of $X_d$ can be studied for various values of $d$.
+
+```{r,echo=F,message=F,warning=F}
+# do it all the way to j
+j <- 50
+probs <- sapply(0:j,function(x)init %*% expm::`%^%`(p.,x))
+p.even <- probs[1,]
+p.odd <- probs[2,]
+library(ggplot2)
+library(latex2exp)
+ggplot(data.frame(idx = 0:j, even = p.even, odd = p.odd)) + geom_line(aes(idx,odd,color = "P(odd)"), alpha = 0.6,size = 2) + geom_line(aes(idx,even,color = "P(even)"),alpha = 0.6,size = 2) + theme_bw() + scale_color_manual(values = c("dodgerblue","tomato2"), labels = unname(TeX(c("$P(X_d = 0)$", "$P(X_d = 1)$")))) + theme(legend.title=element_blank()) + xlab("Flips") + ylab("Probability")
+```
+
+As to be expected, as $d$ gets large, the probability that the number of heads will be odd converges to $\frac 1 2$.
+
+## Generalization
+
+### Modulo $m$
+
+What happens if we toss the same coin, but take modulo $m$ in our final step instead of the parity? The transition matrix thus becomes $m\times m$:
+
+$$\textbf{Q} = \begin{bmatrix} p & q & 0 & 0 & ... & 0 & 0 \\
+                    0 & p & q & 0 & ... & 0 & 0  \\
+\vdots  & \vdots  & \ddots  & \ddots  & \vdots  & \vdots & \vdots\\
+\vdots  & \vdots  & \vdots  & \ddots  & \ddots  & \vdots & \vdots\\
+\vdots  & \vdots  & \vdots  & \vdots  &  \ddots & \ddots & \vdots\\
+0 & 0 & 0 & 0 & ...  & p & q \\
+q & 0 & 0 & 0 & ... & 0 & p \\
+            \end{bmatrix}$$
+                        
+Notice that this is exactly a cycle with self-loops. Again, $\mu_i, i \in 0, ..., m-1$ are sums of geometric series, which are finite.
+  
+
+![image](figs/fig2.0.png)
+
+As for the stationary distribution,
+$$\bar \pi \textbf{Q} = (\pi_0, \pi_1, ... , \pi_{m-1}) = \bar \pi \hspace{2cm} \sum_{j = 0}^{m-1}\pi_j = 1$$
+gives us $\pi_i = 1/n, i \in 0, ..., m-1$. That is, we obtain a uniform distribution as the number of flips goes to infinity. We cannot apply the coupling theorem directly because each of the columns of the transition matrix has 0's. 
+
+<!--
+In terms of convergence rate, we see that if we take $d$ coin tosses,
+$$|| \bar\pi^n_0 - \bar\pi || \le (1- mq)^d = (1 - m\cdot \frac{c}{d})^d \le \exp(-mc)$$
+-->
+
+In fact, we can see for a small value of $d$, that the convergence to the uniform distribution is quite slow. For $c = 1,d = 10$ and $m = 3$, the distribution of $X_d$ is: $$[\mathbb{P}(X_{10} = 0),\mathbb{P}(X_{10} = 1),\mathbb{P}(X_{10} = 2)] = \pi\cdot\textbf{Q}^{10} =\begin{bmatrix}1& 0& 0\end{bmatrix}\cdot\begin{bmatrix}.9 & .1 & 0 \\0& .9 & .1 \\ .1 & 0 & .9\end{bmatrix}^{10} \approx \begin{bmatrix}0.406& 0.399& 0.195\end{bmatrix}$$
+
+```{r, echo=F, results=F}
+p. <- matrix(c(p,1-p,0,0,p,1-p,1-p,0,p),3,3,T)
+init <- matrix(c(1,0,0),1,3)
+round(init %*% (expm::`%^%`(p.,10)),3)
+```
+
+Instead, at around 30 tosses, the distribution approaches uniform.
+<!--
+And again fixing $p=\frac9 {10}$, the distribution of $X_d$ can be studied for different values of $d$.
+-->
+
+```{r,echo=F,warning = F,message = F}
+j <- 50
+probs <- sapply(0:j, function(x) init %*% (expm::`%^%`(p.,x)))
+p0 <- probs[1,]; p1 <- probs[2,]; p2 <- probs[3,]
+ggplot(data.frame(idx = 0:j, p0, p1, p2)) + geom_line(aes(idx,p0,color = "P(0)"), alpha = 0.6,size = 2) + geom_line(aes(idx,p1,color = "P(1)"),alpha = 0.6,size = 2) + geom_line(aes(idx,p2,color = "P(2)"),alpha = 0.6,size = 2) + theme_bw() + theme(legend.title=element_blank()) + xlab("Flips") + ylab("Probability") + ggsci::scale_color_tron(labels = unname(TeX(c("$P(X_d = 0)$", "$P(X_d = 1)$", "P(X_d = 2)")))) 
+
+```
+
+### $m$-sided dice
+
+Let's take this problem one step further. Suppose now we are instead tossing a $m$-sided die, which lands 0 with probability $1 - c/d, c \le 0.5d$ and lands $i$ with probability $r = c/(d\cdot (m-1)), i = 1, ..., m-1$. Again, we take modulo $m$ in our final step. In this case, the transition matrix becomes
+$$\textbf{Q} = \begin{bmatrix} p & r &  ... & r & r \\
+                    r & p &  ... & r & r  \\
+\vdots  & \vdots  & \ddots  & \vdots  & \vdots \\
+r & r & ...  & p & r \\
+r & r & ... & r & p \\
+            \end{bmatrix}$$
+which is a clique with self loops. The following lemma simplifies the verification of the positive recurrence of our example.
+
+::: {.lem} Lemma 7.5 in cite{Mitzenmacher_Eli_Probability_and_computing}
+In a finite Markov chain, at least one state is recurrent and all
+recurrent states are positive recurrent.
+:::
+
+Without loss of generality, assume state $0$ is positive recurrent. By symmetry, we obtain that this Markov chain is positive recurrent. The stationary distribution is again uniform, i.e. $\pi_i = 1/n, i \in 0, ..., m-1$. The rate of convergence, however, is faster.
+$$|| \bar\pi^n_0 - \bar\pi || \le (1- mr)^d = (1 - m\cdot \frac{c}{d\cdot (m-1)})^d \le \exp(-c\cdot\frac{m}{m-1})$$
+
+Fix $c=1,d=10$. For a six sided die that rolls $0$ with $p=1-\frac c d = .9$, and rolls $i$ with probability $\frac{1-p}{5} = 0.02,i\in\{1,2,3,4,5\}$, then the distribution of $X_{10}$ is: \[\pi\cdot\textbf{Q}^{10}=\begin{bmatrix}1&0&0&0&0&0\end{bmatrix}\cdot \begin{bmatrix}.9 & .02 & .02 & .02 & .02 & .02\\.02 & .9  & .02 & .02 & .02 & .02\\ .02 & .02 & .9  & .02 & .02 & .02\\.02 & .02 & .02 & .9  & .02 & .02\\.02 & .02 & .02 & .02 & .9 & .02\\.02 & .02 & .02 & .02 & .02 & .9\end{bmatrix}^{10} \approx \begin{bmatrix}0.399 & 0.12 & 0.12 & 0.12 & 0.12 & 0.12\end{bmatrix}\]
+
+
+```{r,echo=F,results=F}
+r <- (1 - p)/5
+p. <- matrix(c(p,r,r,r,r,r,r,p,r,r,r,r,r,r,p,r,r,r,r,r,r,p,r,r,r,r,r,r,p,r,r,r,r,r,r,p),6,6)
+init <- matrix(c(1,0,0,0,0,0),1,6)
+round(init %*% expm::`%^%`(p.,10),3)
+```
+
+Fixing $p$:
+
+```{r,echo=F,warning = F}
+j <- 50
+probs <- sapply(0:j, function(x) init %*% (expm::`%^%`(p.,x)))
+p0 <- probs[1,]; p1 <- probs[2,]; p2 <- probs[3,]; p3 <- probs[4,];p4 <- probs[5,]; p5 <- probs[6,]
+df <- cbind.data.frame(idx = rep(0:j, 6),rbind.data.frame(cbind.data.frame(pr = p0, P = "0"),cbind.data.frame(pr = p1, P = "1"), cbind.data.frame(pr = p2,P = "2"), cbind.data.frame(pr = p3,P = "3"), cbind.data.frame(pr = p4,P = "4"), cbind.data.frame(pr = p5,P = "5")))
+
+ggplot() + geom_line(data = df, aes(idx,pr,color = P), position = position_dodge(width = 5),alpha = 0.6,size = 2) + theme_bw() + theme(legend.title=element_blank()) + xlab("Rolls") + ylab("Probability") + scale_color_viridis_d(labels = unname(TeX(c("$P(X_d = 0)$","$P(X_d = 1)$", "P(X_d = 2)", "P(X_d = 3)","P(X_d = 4)","P(X_d = 5)")))) 
+
+#jit <- 0.015
+#sz <- 1
+#+ geom_line(data = data.frame(idx = 0:j, p0), aes(idx,p0,color = "P(0)"), alpha = 0.6,size = 2) 
+#geom_line(aes(idx,p1,color = "P(1)"),alpha = 0.6,size = sz, position=position_jitter(w = jit, h=jit)) + geom_line(aes(idx,p2,color = "P(2)"),alpha = 0.6,size = sz, position=position_jitter(w = jit, h=jit)) + geom_line(aes(idx,p3,color = "P(3)"),alpha = 0.6,size = sz, position=position_jitter(w = jit, h=jit)) + geom_line(aes(idx,p4,color = "P(4)"),alpha = 0.6,size = sz, position=position_jitter(w = jit, h=jit)) + geom_line(aes(idx,p5,color = "P(5)"),alpha = 0.6,size = sz, position=position_jitter(w = jit, h=jit)) 
+```
+(A small amount of dodge has been added to help differentiate between the lines)
+
+::: {.thebibliography}
+Mitzenmacher_Eli_Probability_and_computing: Mitzenmacher, Michael, and Eli Upfal. *Probability and computing:
+Randomization and probabilistic techniques in algorithms and data
+analysis.* Cambridge university press, 2017.
+:::

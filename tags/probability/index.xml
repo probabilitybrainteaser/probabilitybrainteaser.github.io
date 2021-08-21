@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>probability on Probability Brain Teasers</title>
-    <link>/tags/probability/</link>
+    <link>https://xieyangxinyu.github.io/tags/probability/</link>
     <description>Recent content in probability on Probability Brain Teasers</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy; 2021 &lt;a href=&#34;https://www.wangchucheng.com/&#34;&gt;C. Wang&lt;/a&gt; and &lt;a href=&#34;https://www.ruiqima.com/&#34;&gt;R. Ma&lt;/a&gt;
 </copyright>
-    <lastBuildDate>Sat, 20 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="/tags/probability/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 20 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://xieyangxinyu.github.io/tags/probability/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>How to get an (almost) fair coin</title>
-      <link>/posts/2021-03-21-how-to-get-an-almost-fair-coin/</link>
+      <link>https://xieyangxinyu.github.io/posts/2021-03-21-how-to-get-an-almost-fair-coin/</link>
       <pubDate>Sat, 20 Mar 2021 00:00:00 +0000</pubDate>
       
-      <guid>/posts/2021-03-21-how-to-get-an-almost-fair-coin/</guid>
+      <guid>https://xieyangxinyu.github.io/posts/2021-03-21-how-to-get-an-almost-fair-coin/</guid>
       <description>If you toss a biased coin independently for a long time and take the parity of your coin tosses, you can get an almost fair coin.</description>
     </item>
     
